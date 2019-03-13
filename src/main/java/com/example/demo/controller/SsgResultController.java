@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SsgResult;
-import com.example.demo.entity.Student;
 import com.example.demo.service.SsgResultServiceImpl;
 
 @RestController
