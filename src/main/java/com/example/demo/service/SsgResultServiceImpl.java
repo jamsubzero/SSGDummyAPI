@@ -16,7 +16,7 @@ public class SsgResultServiceImpl implements SsgResultService {
 
 	@Override
 	public List<SsgResult> getSsgResultByPos(String position) {
-		return	ssgResultRepository.findAllByPosition(position);
+		return	ssgResultRepository.findByPositionOrderByScoreDesc(position);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import com.example.demo.entity.SsgResult;
 
 public interface SsgResultRepository extends JpaRepository<SsgResult, Integer>{
 	
-    public List<SsgResult> findAllByPosition(String position);
+    public List<SsgResult> findByPositionOrderByScoreDesc(String position);
 	
 
 }
