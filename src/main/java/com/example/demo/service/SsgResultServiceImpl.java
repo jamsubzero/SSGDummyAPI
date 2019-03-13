@@ -23,6 +23,11 @@ public class SsgResultServiceImpl implements SsgResultService {
 	public List<SsgResult> getAllSsgResult() {
 		return  ssgResultRepository.findAll();
 	}
+
+	@Override
+	public List<SsgResult> insertResults(List<SsgResult> entities) {
+		return ssgResultRepository.saveAll(entities);
+	}
 	
 	
 	

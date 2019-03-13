@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SsgResult;
+import com.example.demo.entity.Student;
 import com.example.demo.service.SsgResultServiceImpl;
 
 @RestController
@@ -31,7 +34,13 @@ public class SsgResultController {
 		return ssgResultServiceImpl.getAllSsgResult();
 	}
 	
+	@CrossOrigin("*")
+	@PostMapping("/insertresults")
+	public List<SsgResult> insertResults(@RequestBody List<SsgResult> results){
+		return ssgResultServiceImpl.insertResults(results);
+	}
 	
+
 	
 	
 }

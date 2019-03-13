@@ -8,4 +8,6 @@ public interface SsgResultService {
 
 	List<SsgResult> getSsgResultByPos(String position);
 	List<SsgResult> getAllSsgResult();
+	List<SsgResult> insertResults(List<SsgResult> results);
+	
 }
