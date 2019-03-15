@@ -24,6 +24,7 @@ public class SsgResult {
 		this.position = position;
 		this.name = name;
 		this.score = score;
+	
 	}
 	
 	public SsgResult(String position, String name, int score) {

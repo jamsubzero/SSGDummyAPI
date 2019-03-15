@@ -16,30 +16,26 @@ import com.example.demo.service.SsgResultServiceImpl;
 
 @RestController
 @RequestMapping("/ssgdummyapi")
+@CrossOrigin("*") // allow all client origins
 public class SsgResultController {
 
 	@Autowired
     SsgResultServiceImpl ssgResultServiceImpl;  
-	
-	@CrossOrigin("*")
+
 	@GetMapping("/getresult/{pos}")
 	public List<SsgResult> getResultByPos(@PathVariable("pos") String position){
 		return ssgResultServiceImpl.getSsgResultByPos(position);
 	}
 	
-	@CrossOrigin("*")
 	@GetMapping("/getresult/All")
 	public List<SsgResult> getAllResult(){
 		return ssgResultServiceImpl.getAllSsgResult();
 	}
 	
-	@CrossOrigin("*")
 	@PostMapping("/insertresults")
 	public List<SsgResult> insertResults(@RequestBody List<SsgResult> results){
 		return ssgResultServiceImpl.insertResults(results);
 	}
-	
-
 	
 	
 }
