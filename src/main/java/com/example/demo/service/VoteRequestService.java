@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.POJO.VoteRequest;
-import com.example.demo.entity.POJO.VoteResponse;
+import com.example.demo.entity.model.VoteRequest;
+import com.example.demo.entity.model.VoteResponse;
 
 public interface VoteRequestService {
 

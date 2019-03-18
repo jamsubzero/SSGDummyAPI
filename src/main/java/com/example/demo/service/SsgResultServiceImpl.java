@@ -32,7 +32,7 @@ public class SsgResultServiceImpl implements SsgResultService {
 
 	@Override
 	public List<SsgResult> getSsgByPos(String position) {
-        return ssgResultRepository.findByPositionOrderByNameDesc(position);
+        return ssgResultRepository.findByPositionOrderByNameAsc(position);
 	}
 
 	@Override

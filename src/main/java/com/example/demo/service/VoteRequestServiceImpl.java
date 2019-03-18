@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Voter;
-import com.example.demo.entity.POJO.VoteRequest;
-import com.example.demo.entity.POJO.VoteResponse;
+import com.example.demo.entity.model.VoteRequest;
+import com.example.demo.entity.model.VoteResponse;
 import com.example.demo.repository.VoterRepository;
 
 

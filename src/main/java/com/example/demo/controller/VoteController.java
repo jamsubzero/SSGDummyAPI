@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SsgResult;
-import com.example.demo.entity.POJO.Ballot;
-import com.example.demo.entity.POJO.VoteRequest;
-import com.example.demo.entity.POJO.VoteResponse;
+import com.example.demo.entity.model.Ballot;
+import com.example.demo.entity.model.VoteRequest;
+import com.example.demo.entity.model.VoteResponse;
 import com.example.demo.service.SsgResultService;
 import com.example.demo.service.VoteRequestService;
 import com.example.demo.service.VoteRequestServiceImpl;

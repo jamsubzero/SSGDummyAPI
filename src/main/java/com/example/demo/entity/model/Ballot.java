@@ -1,4 +1,4 @@
-package com.example.demo.entity.POJO;
+package com.example.demo.entity.model;
 
 import java.util.List;
 
