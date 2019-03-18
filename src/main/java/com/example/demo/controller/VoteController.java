@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SsgResult;
 import com.example.demo.entity.model.Ballot;
+import com.example.demo.entity.model.CastBallotResult;
 import com.example.demo.entity.model.VoteRequest;
 import com.example.demo.entity.model.VoteResponse;
 import com.example.demo.service.SsgResultService;
@@ -41,7 +42,7 @@ public class VoteController {
 	}
 	
 	@PostMapping("castballot")
-	public String castBallot(@RequestBody Ballot ballot) {
+	public CastBallotResult castBallot(@RequestBody Ballot ballot) {
 		List<SsgResult> ssgResults = new ArrayList<>();
 	    String voterID = ballot.getVoter();
 	    voterServiceImpl.updateVoterStatus(voterServiceImpl.getVoterById(voterID).get());
@@ -59,7 +60,7 @@ public class VoteController {
 	    }
 	    
 	    ssgResultServiceImpl.insertResults(ssgResults);
-		return "success";
+		return new CastBallotResult("Sucess");
 	}
 	
 	@GetMapping("tryCastballot")
