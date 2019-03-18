@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.SsgResult;
+import com.example.demo.entity.POJO.Ballot;
 import com.example.demo.entity.POJO.VoteRequest;
 import com.example.demo.entity.POJO.VoteResponse;
+import com.example.demo.service.SsgResultService;
+import com.example.demo.service.VoteRequestService;
 import com.example.demo.service.VoteRequestServiceImpl;
+import com.example.demo.service.VoterService;
 
 @RestController
 @RequestMapping("/vote")
@@ -18,16 +27,51 @@ import com.example.demo.service.VoteRequestServiceImpl;
 public class VoteController {
 	
 	@Autowired
-	VoteRequestServiceImpl VoteRequestServiceImpl;
+	VoteRequestService voteRequestServiceImpl;
+	
+	@Autowired
+	SsgResultService ssgResultServiceImpl;  
+	
+	@Autowired
+	VoterService voterServiceImpl;
 
 	@PostMapping("/voterequest")
 	public VoteResponse requestVote(@RequestBody VoteRequest voteRequest) {
-		return VoteRequestServiceImpl.requestVote(voteRequest);	
+		return voteRequestServiceImpl.requestVote(voteRequest);	
 	}
 	
-	@GetMapping("/getreq")
-	public VoteRequest getReq() {
-		return new VoteRequest("HD00000000");
+	@PostMapping("castballot")
+	public String castBallot(@RequestBody Ballot ballot) {
+		List<SsgResult> ssgResults = new ArrayList<>();
+	    String voterID = ballot.getVoter();
+	    voterServiceImpl.updateVoterStatus(voterServiceImpl.getVoterById(voterID).get());
+	    int presID = ballot.getPres();
+	    ssgResults.add(ssgResultServiceImpl.addScore(ssgResultServiceImpl.getSsgById(presID).get()));
+	    int vpID = ballot.getVp();
+	    ssgResults.add(ssgResultServiceImpl.addScore(ssgResultServiceImpl.getSsgById(vpID).get()));
+	    List<Integer> sen = ballot.getSen();
+	    for(int senID: sen) {
+	    	ssgResults.add(ssgResultServiceImpl.addScore(ssgResultServiceImpl.getSsgById(senID).get()));
+	    }
+	    List<Integer> rep = ballot.getRep();
+	    for(int repID: rep) {
+	    	ssgResults.add(ssgResultServiceImpl.addScore(ssgResultServiceImpl.getSsgById(repID).get()));
+	    }
+	    
+	    ssgResultServiceImpl.insertResults(ssgResults);
+		return "success";
 	}
+	
+	@GetMapping("tryCastballot")
+	public Ballot tryCastBallot() {
+		Ballot bal =  new Ballot("120927", 3, 1, 
+				                    Arrays.asList(5, 6, 7),
+				                    Arrays.asList(15, 16)
+	  			                 );
+		return bal;
+	}
+	
+	
+	
 	
 }

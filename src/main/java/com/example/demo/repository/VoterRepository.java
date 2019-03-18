@@ -8,5 +8,5 @@ import com.example.demo.entity.Voter;
 @Repository
 public interface VoterRepository extends JpaRepository<Voter, String>{
 	
-
+	
 }

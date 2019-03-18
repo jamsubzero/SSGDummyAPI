@@ -12,21 +12,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SsgResult;
+import com.example.demo.service.SsgResultService;
 import com.example.demo.service.SsgResultServiceImpl;
 
 @RestController
-@RequestMapping("/ssgdummyapi")
+@RequestMapping("/ssgapi")
 @CrossOrigin("*") // allow all client origins
 public class SsgResultController {
 
 	@Autowired
-    SsgResultServiceImpl ssgResultServiceImpl;  
+	SsgResultService ssgResultServiceImpl;  
 
 	@GetMapping("/getresult/{pos}")
 	public List<SsgResult> getResultByPos(@PathVariable("pos") String position){
 		return ssgResultServiceImpl.getSsgResultByPos(position);
 	}
 	
+	
+	@GetMapping("/get/{pos}")
+	public List<SsgResult> getSsgByPos(@PathVariable("pos") String position){
+		return ssgResultServiceImpl.getSsgByPos(position);
+	}
+	 
+	 
 	@GetMapping("/getresult/All")
 	public List<SsgResult> getAllResult(){
 		return ssgResultServiceImpl.getAllSsgResult();
@@ -37,5 +45,5 @@ public class SsgResultController {
 		return ssgResultServiceImpl.insertResults(results);
 	}
 	
-	
+		
 }

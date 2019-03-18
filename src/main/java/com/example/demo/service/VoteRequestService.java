@@ -7,4 +7,5 @@ public interface VoteRequestService {
 
 	VoteResponse requestVote(VoteRequest voteRequest);
 	
+	
 }

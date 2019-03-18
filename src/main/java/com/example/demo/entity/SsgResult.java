@@ -14,9 +14,7 @@ public class SsgResult {
 	private String name;
 	private int score;
 	
-	
 	public SsgResult() {
-		super();
 	}
 
 	public SsgResult(int id, String position, String name, int score) {
