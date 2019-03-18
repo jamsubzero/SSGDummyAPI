@@ -19,7 +19,6 @@ import com.example.demo.entity.model.VoteRequest;
 import com.example.demo.entity.model.VoteResponse;
 import com.example.demo.service.SsgResultService;
 import com.example.demo.service.VoteRequestService;
-import com.example.demo.service.VoteRequestServiceImpl;
 import com.example.demo.service.VoterService;
 
 @RestController
@@ -41,12 +40,15 @@ public class VoteController {
 		return voteRequestServiceImpl.requestVote(voteRequest);	
 	}
 	
+	
+	//TODO add error handling for empty candidates i.e. if the voter did'nt voter
 	@PostMapping("castballot")
 	public CastBallotResult castBallot(@RequestBody Ballot ballot) {
 		List<SsgResult> ssgResults = new ArrayList<>();
 	    String voterID = ballot.getVoter();
 	    voterServiceImpl.updateVoterStatus(voterServiceImpl.getVoterById(voterID).get());
-	    int presID = ballot.getPres();
+	   
+	    int presID = ballot.getPres(); 
 	    ssgResults.add(ssgResultServiceImpl.addScore(ssgResultServiceImpl.getSsgById(presID).get()));
 	    int vpID = ballot.getVp();
 	    ssgResults.add(ssgResultServiceImpl.addScore(ssgResultServiceImpl.getSsgById(vpID).get()));
@@ -60,8 +62,10 @@ public class VoteController {
 	    }
 	    
 	    ssgResultServiceImpl.insertResults(ssgResults);
-		return new CastBallotResult("Sucess");
+		return new CastBallotResult("Success");
 	}
+	
+	
 	
 	@GetMapping("tryCastballot")
 	public Ballot tryCastBallot() {
