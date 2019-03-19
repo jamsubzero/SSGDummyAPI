@@ -12,11 +12,12 @@ public class VoteRequest {
 	
 	
 	private String id;
+	private String otp;
 	
 	public VoteRequest() { 
 	}
 
-	public VoteRequest(String id) {
+	public VoteRequest(String id, String otp) {
 		this.id = id;
 	}
 
@@ -28,10 +29,20 @@ public class VoteRequest {
 		this.id = id;
 	}
 
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
 	@Override
 	public String toString() {
-		return "VoteRequest [id=" + id + "]";
+		return "VoteRequest [id=" + id + ", otp=" + otp + "]";
 	}
+
+	
 	
 	
     	

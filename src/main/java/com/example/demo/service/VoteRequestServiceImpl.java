@@ -27,10 +27,10 @@ public class VoteRequestServiceImpl implements VoteRequestService {
 	@Override
 	public VoteResponse requestVote(VoteRequest voteRequest) {
 		LOGGER.info("VOTEREQUESTID:"+voteRequest.getId());
-	  Optional<Voter> res = voterRepository.findById(voteRequest.getId());
+	  Optional<Voter> res = voterRepository.findVoterByIdAndOtp(voteRequest.getId(), voteRequest.getOtp());
 	  
 		if (!res.isPresent()) {
-			return new VoteResponse("-", "-", "-", 0, STUDENT_NOT_EXISTS);
+			return new VoteResponse("-", "-", "-", -1, STUDENT_NOT_EXISTS);
 		}
 		Voter voter = res.get();
 		return new VoteResponse(voter.getId(), voter.getName(), voter.getCourse(), voter.getVoted(), STUDENT_EXISTS);
