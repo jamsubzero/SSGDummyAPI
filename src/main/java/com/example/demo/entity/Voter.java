@@ -10,6 +10,7 @@ public class Voter {
 	String id;
 	String name;
 	String course;
+	String otp; 
 	int voted;	
 	
 	public Voter() {
@@ -17,19 +18,26 @@ public class Voter {
 	}
 
 	public Voter(String name, String course, int voted) {
-		super();
 		this.name = name;
 		this.course = course;
 		this.voted = voted;
 	}
 
+	public Voter(String id, String name, String course, String otp,  int voted) {
+		this.id = id;
+		this.name = name;
+		this.course = course;
+		this.otp = otp;
+		this.voted = voted;
+	}
+	
 	public Voter(String id, String name, String course, int voted) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.course = course;
 		this.voted = voted;
 	}
+	
 	
 	public String getId() {
 		return id;
@@ -49,16 +57,27 @@ public class Voter {
 	public void setCourse(String course) {
 		this.course = course;
 	}
+	
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
 	public int getVoted() {
 		return voted;
 	}
 	public void setVoted(int voted) {
 		this.voted = voted;
 	}
+
 	@Override
 	public String toString() {
-		return "Voter [id=" + id + ", name=" + name + ", course=" + course + ", voted=" + voted + "]";
+		return "Voter [id=" + id + ", name=" + name + ", course=" + course + ", otp=" + otp + ", voted=" + voted + "]";
 	}
+
 	
 	
 	

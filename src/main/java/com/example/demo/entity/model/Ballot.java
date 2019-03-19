@@ -50,6 +50,7 @@ public class Ballot {
 	public void setRep(List<Integer> rep) {
 		this.rep = rep;
 	}
+	
 	@Override
 	public String toString() {
 		return "Ballot [voter=" + voter + ", pres=" + pres + ", vp=" + vp + ", sen=" + sen + ", rep=" + rep + "]";
