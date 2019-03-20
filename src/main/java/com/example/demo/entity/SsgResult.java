@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 @Entity
 public class SsgResult {
@@ -68,6 +69,10 @@ public class SsgResult {
 		return "Ssgresult [id=" + id + ", position=" + position + ", name=" + name + ", score=" + score + "]";
 	}
 	
+	@PrePersist
+	void preInsert() {
+	   this.score = 0;
+	}
 	
 	
 }

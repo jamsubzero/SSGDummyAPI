@@ -10,8 +10,11 @@ public interface SsgResultService {
 	List<SsgResult> getSsgResultByPos(String position);
 	List<SsgResult> getSsgByPos(String position);
 	List<SsgResult> getAllSsgResult();
-	List<SsgResult> insertResults(List<SsgResult> results);
 	Optional<SsgResult> getSsgById(int id);
 	SsgResult addScore(SsgResult ssgResult);
+	List<SsgResult> insertResults(List<SsgResult> results);
+	SsgResult insertOrSaveSsgResult(SsgResult ssgResult);
+	void deleteSsgResultById(int id);
+	
 	
 }

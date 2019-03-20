@@ -26,7 +26,6 @@ public class VoterServiceImpl implements VoterService{
 		return voter;
 	}
 
-
 	@Override
 	public GenOpResult generateOTPById(String id) {
 		 Optional<Voter> voter = voterRepository.findById(id);

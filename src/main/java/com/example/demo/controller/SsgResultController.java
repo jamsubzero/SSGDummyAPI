@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SsgResult;
+import com.example.demo.entity.model.CastBallotResult;
 import com.example.demo.service.SsgResultService;
 import com.example.demo.service.SsgResultServiceImpl;
 
@@ -35,7 +36,7 @@ public class SsgResultController {
 	}
 	 
 	 
-	@GetMapping("/getresult/All")
+	@GetMapping("/getresult/all")
 	public List<SsgResult> getAllResult(){
 		return ssgResultServiceImpl.getAllSsgResult();
 	}
@@ -43,6 +44,18 @@ public class SsgResultController {
 	@PostMapping("/insertresults")
 	public List<SsgResult> insertResults(@RequestBody List<SsgResult> results){
 		return ssgResultServiceImpl.insertResults(results);
+	}
+	
+	@PostMapping("/insertcanditate")
+	public List<SsgResult> insertCandidate(@RequestBody SsgResult ssgResult){
+		ssgResultServiceImpl.insertOrSaveSsgResult(ssgResult);
+		return ssgResultServiceImpl.getAllSsgResult();
+	}
+	
+	@GetMapping("/delete/{id}")
+	public List<SsgResult> deleteCandidate(@PathVariable("id") int id){
+		ssgResultServiceImpl.deleteSsgResultById(id);
+		return ssgResultServiceImpl.getAllSsgResult();
 	}
 	
 		

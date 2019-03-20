@@ -46,6 +46,18 @@ public class SsgResultServiceImpl implements SsgResultService {
 		ssgResult.setScore(newScore);
 		return ssgResult;
 	}
+	
+	
+
+	@Override
+	public SsgResult insertOrSaveSsgResult(SsgResult ssgResult) {
+		return ssgResultRepository.save(ssgResult);
+	}
+
+	@Override
+	public void deleteSsgResultById(int id) {
+		ssgResultRepository.deleteById(id);
+	}
 
 	
 	
