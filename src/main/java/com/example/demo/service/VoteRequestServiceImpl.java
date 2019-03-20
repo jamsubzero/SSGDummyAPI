@@ -37,4 +37,6 @@ public class VoteRequestServiceImpl implements VoteRequestService {
 
 	}
 
+	
+
 }

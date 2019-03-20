@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Configuration;
 import com.example.demo.service.ConfigurationService;
 import com.example.demo.service.ConfigurationServiceImpl;
+import com.example.demo.service.SsgResultService;
+import com.example.demo.service.VoterService;
 
 @RestController
 @RequestMapping("/config")
@@ -20,6 +22,12 @@ public class ConfigurationController {
 	
 	@Autowired
 	ConfigurationService configurationServiceImpl;
+	
+	@Autowired
+	SsgResultService ssgResultServiceImpl;
+
+	@Autowired
+	VoterService voterServiceImpl;
 	
 	@GetMapping("/votestat/{status}")
 	public Configuration setConfiguration(@PathVariable int status) {
@@ -30,6 +38,13 @@ public class ConfigurationController {
 	@GetMapping("/getstat")
 	public Optional<Configuration> getConfiguration() {
 	  return configurationServiceImpl.getVotingStatus();
+	}
+	
+	@GetMapping("/rezero")
+	public String tryRezero() {
+		voterServiceImpl.reZeroVoter(0, null);
+		ssgResultServiceImpl.reZeroSsgResult(0);
+		return "done!";
 	}
 	
 	

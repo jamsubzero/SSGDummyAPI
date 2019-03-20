@@ -23,6 +23,7 @@ public class VoterServiceImpl implements VoterService{
 	public Voter updateVoterStatus(Voter voter) {
 		voter.setVoted( VOTED_STATUS );
 		voterRepository.save(voter);
+		
 		return voter;
 	}
 
@@ -57,6 +58,12 @@ public class VoterServiceImpl implements VoterService{
 	}
 	
 
+	@Override
+	public int reZeroVoter(Integer voted, String otp) {
+		return voterRepository.setVotedAndOtpForVoter(voted, otp);
+	}
+	
+	
 	  private String generateOTP(int length) {
 	      String numbers = "1234567890";
 	      Random random = new Random();

@@ -15,6 +15,6 @@ public interface SsgResultService {
 	List<SsgResult> insertResults(List<SsgResult> results);
 	SsgResult insertOrSaveSsgResult(SsgResult ssgResult);
 	void deleteSsgResultById(int id);
-	
+	int reZeroSsgResult(Integer score);
 	
 }

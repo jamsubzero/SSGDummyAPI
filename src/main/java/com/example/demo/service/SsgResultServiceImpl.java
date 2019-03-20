@@ -59,6 +59,11 @@ public class SsgResultServiceImpl implements SsgResultService {
 		ssgResultRepository.deleteById(id);
 	}
 
+	@Override
+	public int reZeroSsgResult(Integer score) {
+		return ssgResultRepository.setScoreForSsgResult(0);
+	}
+
 	
 	
 	

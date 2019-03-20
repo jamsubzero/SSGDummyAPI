@@ -10,6 +10,6 @@ public interface VoterService {
 	Voter updateVoterStatus(Voter voter);
 	Optional<Voter> getVoterById(String id);
 	GenOpResult generateOTPById(String voter);
-	
+	int reZeroVoter(Integer status, String otp);
 	
 }

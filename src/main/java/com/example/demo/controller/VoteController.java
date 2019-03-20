@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SsgResult;
-import com.example.demo.entity.Voter;
 import com.example.demo.entity.model.Ballot;
 import com.example.demo.entity.model.CastBallotResult;
 import com.example.demo.entity.model.GenOpResult;
@@ -41,14 +39,11 @@ public class VoteController {
 
 	@Autowired
 	VoterService voterServiceImpl;
-	
-	
+
 	@GetMapping("/genotp/{voterid}")
-	public GenOpResult genOp(@PathVariable("voterid") String voterid){
+	public GenOpResult genOp(@PathVariable("voterid") String voterid) {
 		return voterServiceImpl.generateOTPById(voterid);
 	}
-	
-	
 
 	@PostMapping("/voterequest")
 	public VoteResponse requestVote(@RequestBody VoteRequest voteRequest) {
@@ -56,7 +51,7 @@ public class VoteController {
 	}
 
 	// TODO add error handling for empty candidates i.e. if the voter did'nt voter
-	@PostMapping("castballot")
+	@PostMapping("/castballot")
 	public CastBallotResult castBallot(@RequestBody Ballot ballot) {
 		List<SsgResult> ssgResults = new ArrayList<>();
 		logger.info("BALLOT:" + ballot);
@@ -71,10 +66,9 @@ public class VoteController {
 		List<Integer> sen = ballot.getSen();
 		for (int senID : sen) {
 			ssgResultServiceImpl.getSsgById(senID)
-					.ifPresent(
-							senator -> ssgResults.add(ssgResultServiceImpl.addScore(senator)));
+					.ifPresent(senator -> ssgResults.add(ssgResultServiceImpl.addScore(senator)));
 		}
-		
+
 		List<Integer> rep = ballot.getRep();
 		for (int repID : rep) {
 			ssgResultServiceImpl.getSsgById(repID)
@@ -82,15 +76,16 @@ public class VoteController {
 		}
 
 		ssgResultServiceImpl.insertResults(ssgResults);
-	
+
 		return new CastBallotResult("Success");
 	}
-	
 
-	@GetMapping("tryCastballot")
+	@GetMapping("/tryCastballot")
 	public Ballot tryCastBallot() {
 		Ballot bal = new Ballot("120927", 3, 1, Arrays.asList(5, 6, 7), Arrays.asList(15, 16));
 		return bal;
 	}
+
+	
 
 }
