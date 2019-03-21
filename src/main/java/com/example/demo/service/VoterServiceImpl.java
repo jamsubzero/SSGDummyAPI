@@ -1,14 +1,17 @@
 package com.example.demo.service;
 
+import java.text.DecimalFormat;
 import java.util.Optional;
 import java.util.Random;
 
+import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Voter;
 import com.example.demo.entity.model.GenOpResult;
+import com.example.demo.entity.model.VotingStatistics;
 import com.example.demo.repository.VoterRepository;
 
 @Service
@@ -74,6 +77,52 @@ public class VoterServiceImpl implements VoterService{
 	      }
 	      return String.valueOf(otp);
 	   }
+
+	@Override
+	public VotingStatistics getStatisticsByCourse(String course) {
+		// IT,  BA, ED, FI, CRIM
+		String courseKey = "";
+		if(course.equals("IT")) {
+			courseKey = "BSI%";
+		}else if(course.equals("ED")) {
+			courseKey = "%ED%";
+		}else if(course.equals("BA")) {
+			courseKey = "%BA%";
+		}else if(course.equals("CRIM")) {
+			courseKey = "%CRIM%";
+		}else if(course.equals("FI")) {
+			courseKey = "%FI%";
+		}
+
+		long population = voterRepository.countVoterByCourse(courseKey);
+		long voted = voterRepository.countVoterByCourseAndVoted(courseKey, VOTED_STATUS);
+		float percentage = 0;
+		try {
+		DecimalFormat df = new DecimalFormat("#.##");
+		percentage = Float.parseFloat(df.format((  ((float)voted) /  ((float)population)) * 100));
+		System.out.println("POP:" + population+ ", VOTED: "+ voted + ", PERCENTAGE:" + percentage);
+		}catch (NumberFormatException ex){
+			percentage = 0;	
+		}
+		return new VotingStatistics(population, voted,  percentage);
+	}
+
+	@Override
+	public VotingStatistics getOverAllStatistics() {
+		Long population = voterRepository.count();
+		Long voted = voterRepository.countVoterByVoted(VOTED_STATUS);
+		float percentage = 0;
+		try {
+		DecimalFormat df = new DecimalFormat("#.##");
+		percentage = Float.parseFloat(df.format((  ((float)voted) /  ((float)population)) * 100));
+		System.out.println("POP:" + population+ ", VOTED: "+ voted + ", PERCENTAGE:" + percentage);
+		}catch (NumberFormatException ex){
+			percentage = 0;	
+		}
+		return new VotingStatistics(population, voted,  percentage);
+	}
+
+	
 	
 
 	

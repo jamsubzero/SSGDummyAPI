@@ -21,4 +21,13 @@ public interface VoterRepository extends JpaRepository<Voter, String>{
 	@Query("update Voter v set v.voted = ?1, v.otp = ?2 ")
 	int setVotedAndOtpForVoter(Integer voted, String otp);
 	
+	@Query("select count(*) from Voter v where v.course like ?1 and v.voted = ?2")
+	long countVoterByCourseAndVoted(String course, Integer voted);
+	
+	@Query("select count(*) from Voter v where v.course like ?1")
+	long countVoterByCourse(String course);
+	
+	long countVoterByVoted(int voted);
+	
+	
 }

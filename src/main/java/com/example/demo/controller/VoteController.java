@@ -20,6 +20,7 @@ import com.example.demo.entity.model.CastBallotResult;
 import com.example.demo.entity.model.GenOpResult;
 import com.example.demo.entity.model.VoteRequest;
 import com.example.demo.entity.model.VoteResponse;
+import com.example.demo.entity.model.VotingStatistics;
 import com.example.demo.service.SsgResultService;
 import com.example.demo.service.VoteRequestService;
 import com.example.demo.service.VoterService;
@@ -43,6 +44,16 @@ public class VoteController {
 	@GetMapping("/genotp/{voterid}")
 	public GenOpResult genOp(@PathVariable("voterid") String voterid) {
 		return voterServiceImpl.generateOTPById(voterid);
+	}
+	
+	@GetMapping("/statistics/{course}")
+	public VotingStatistics getStatistics(@PathVariable("course") String course) {
+		return voterServiceImpl.getStatisticsByCourse(course);
+	}
+	
+	@GetMapping("/statistics/all")
+	public VotingStatistics getStatistics() {
+		return voterServiceImpl.getOverAllStatistics();
 	}
 
 	@PostMapping("/voterequest")

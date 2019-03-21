@@ -61,6 +61,7 @@ public class SsgResultServiceImpl implements SsgResultService {
 
 	@Override
 	public int reZeroSsgResult(Integer score) {
+	
 		return ssgResultRepository.setScoreForSsgResult(0);
 	}
 
